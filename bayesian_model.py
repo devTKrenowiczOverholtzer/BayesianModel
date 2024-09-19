@@ -33,11 +33,25 @@ print(df.head())
 # create a classifer with all these features 
 # extend model by using a couple different subsets of the features one of the ways I would suggest choosing those features is eliminating some of the ones that are cross correlated with others
 
- 
-
-
-
+# list out all the types of faults 
+# k_scratch typo in dataset
+# creating a list of faults 
+fauts = ["Pastry","Z_Scratch","K_Scatch", "Stains","Dirtin", "Dirtiness", "Bumps", "Other_Faults"]
+# Create new column : code each of these faults into its own integer in this column 
 # going to have to create a different column that has an integer for each fault to put this into our passifier for sklearn
+# data wrangling (many datasets)
+df['fault'] = 0
+# indexing our dataframe at this new column fault which we are creating and we are setting the whole column to 0 so every entry in the column will be equaled to zero 
+# print columns 
+print(df.columns)
 
+# now have 35 columns 
+# measurements from x min to sigmoidofareas 
+# faults from pastry to other_faults 
+# added column fault - print head see that this column should just have 0 there
+print(df.head())
 
+# dataset: sorted by fault type 
+# default behavior of test train split function is to randomly grab a sample which is good 
+# if we had just taken out the last 20% of the dataset it was sorted so the test set would have faults that werent seen in the training set which would be bad 
 
