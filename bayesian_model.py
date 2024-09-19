@@ -36,7 +36,7 @@ print(df.head())
 # list out all the types of faults 
 # k_scratch typo in dataset
 # creating a list of faults 
-fauts = ["Pastry","Z_Scratch","K_Scatch", "Stains","Dirtin", "Dirtiness", "Bumps", "Other_Faults"]
+faults = ["Pastry","Z_Scratch","K_Scatch", "Stains", "Dirtiness", "Bumps", "Other_Faults"]
 # Create new column : code each of these faults into its own integer in this column 
 # going to have to create a different column that has an integer for each fault to put this into our passifier for sklearn
 # data wrangling (many datasets)
@@ -55,3 +55,20 @@ print(df.head())
 # default behavior of test train split function is to randomly grab a sample which is good 
 # if we had just taken out the last 20% of the dataset it was sorted so the test set would have faults that werent seen in the training set which would be bad 
 
+# Lets create a new categorical variable for each fault 
+# This will be an integer
+# This will go in the new fault column 
+# make iterator in range 0 for length of faults list: iterate over faults list
+for i in range(0, len(faults)):
+	# get indexes of where all faults were that match a certain fault type 
+	# index list
+	# fault indexes are equal to the data frame and we are going to locate where the specific fault we are looking at is equal to 1 , going to get indexes of those and then convert it to a list
+	true_fault_indexes = df.loc[df[faults[i]] == 1].index.tolist()
+	# for each i start at 0 going to grab fault index 0 which first time it is going to be pastry, located in the dataframe everywhere where the pastry column is equal to 1, where pastry fault occured, grab the indexes of those in the dataset and convert this to a list.
+	# Same with zscratch. will be i number 1 zscratch is fault number one index; find everywhere in our dataframe where our zscratch is equal to 1  cause that indicates a fault there and convert that to a list 
+	# locate everywhere those indexs are and everywhere that the fault is true in the fault column going to create a categorical variable called i+1
+	df.loc[true_fault_indexes, "fault"]=i+1
+	# pastry i 0 index 0, everywhere there is a pastry fault in that fault column we are going to say is fault number 1 
+	# just encoding it
+	 
+ 
