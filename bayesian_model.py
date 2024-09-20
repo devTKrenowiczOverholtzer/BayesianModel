@@ -70,5 +70,8 @@ for i in range(0, len(faults)):
 	df.loc[true_fault_indexes, "fault"]=i+1
 	# pastry i 0 index 0, everywhere there is a pastry fault in that fault column we are going to say is fault number 1 
 	# just encoding it
-	 
- 
+print(df["fault"])
+# when it goes to that iterator lets go ahead and print out fault column 
+# first five faults are 1's thats good , thats pastry faults went in order 
+# last five columns we see they are fault number 7 which are other faults 
+# successfully assigned an integer encoding the type of fault into this fault column because this is the format that the classifier is going to expect it in  
