@@ -75,3 +75,41 @@ print(df["fault"])
 # first five faults are 1's thats good , thats pastry faults went in order 
 # last five columns we see they are fault number 7 which are other faults 
 # successfully assigned an integer encoding the type of fault into this fault column because this is the format that the classifier is going to expect it in  
+
+# Create our dataset trainging and test x,y; features and outcomes 
+# Create two sub datasets from our overall dataset 
+# Our overall dataset encorporates both our features and our outcomes and we want to seperate just our features, sepearte just our outcomes 
+# new list called drop features: fault column plus faults list: creating a list of things that wont be in the features dataframe 
+# creating a list of things that wont be in the features data frame 
+drop_features = ["fault"] + faults
+# features new dataframe is going to be our dataframe where we drop our features we are going to drop and we are droppping it along the first axis
+features = df.drop(drop_features, axis=1)
+# outcomes equal to the dataframe fault column
+outcomes = df["fault"]
+# our df variable is not going to be changed
+# but we are creating two sub dataframes that are going to be our inputs and our outputs to the model 
+# the features data frame we dropped all the outputs 
+# the outcome is resitricted to just this fault variable 
+
+# columns of features
+# x min to sigmoid area (no fault features)
+print(features.columns) 
+# head of outcomes 
+# first five rows of fault we see have index fault variables that will correspond to the pastry faults 
+print(outcomes.head())
+
+training_features, test_features, training_outcomes, test_outcomes = train_test_split(features, outcomes, test_size=0.1)
+# using sklearn split passing it features and outcomes to create these four sets and the set size is 10%
+bayes_classifer = GaussianNB()
+# create classifier which is guassianNB 
+bayes_classifer.fit(training_features,training_outcomes)
+#fit our training and testing features 
+mean_accuracy = bayes_classifer.score(test_features, test_outcomes)
+# print out score 
+# when done score the test features and the test outcomes
+#print mean_accuracy score - see how it did 
+print(f"mean_accuracy: {mean_accuracy}")
+# random subset of training and testing so this number can move around a little bit depending, rerun
+
+# predict one instance with this function which is handy and also get the log probability of each outcome for each feature
+
